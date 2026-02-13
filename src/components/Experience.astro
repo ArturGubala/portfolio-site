@@ -4,12 +4,13 @@ import type { ExperienceProps } from "@types";
 
 interface Props {
   experience: ExperienceProps[];
+  sectionTitle: string;
 }
 
-const { experience } = Astro.props;
+const { experience, sectionTitle } = Astro.props;
 ---
 
-<Section text="Work Experience" href="experience">
+<Section text={sectionTitle} href="experience">
   {
     experience.map(({ company, position, startDate, endDate, summary }) => (
       <div class="mb-10">
@@ -20,7 +21,7 @@ const { experience } = Astro.props;
           <h4 class="mb-0.5 font-serif text-2xl font-medium text-primary">
             {position}
           </h4>
-          <span class="pb-[2px] text-sm text-white/70">
+          <span class="pb-0.5 text-sm text-white/70">
             {startDate} — {endDate}
           </span>
         </div>

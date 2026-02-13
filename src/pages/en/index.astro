@@ -11,11 +11,17 @@ import "../../styles/global.css";
 const locale = "en" as const;
 const config = getConfig(locale);
 const content = getContent(locale);
+const { ui } = content;
 ---
 
 <Layout config={config} locale={locale}>
-  <Hero {...content.hero} />
-  <Experience experience={content.experience} />
-  <Projects projects={content.projects} />
-  <About {...content.about} name={content.hero.name} />
+  <Hero {...content.hero} ctaButton={ui.heroCtaButton} />
+  <Experience experience={content.experience} sectionTitle={ui.experienceTitle} />
+  <Projects
+    projects={content.projects}
+    sectionTitle={ui.projectsTitle}
+    sourceLabel={ui.projectSource}
+    previewLabel={ui.projectPreview}
+  />
+  <About {...content.about} name={content.hero.name} sectionTitle={ui.aboutTitle} />
 </Layout>

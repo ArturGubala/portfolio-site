@@ -85,6 +85,14 @@ export const CONTENT_EN: SiteContent = {
       image: "/clone-ig.png",
     },
   ],
+  ui: {
+    heroCtaButton: "Get in Touch",
+    experienceTitle: "Work Experience",
+    projectsTitle: "Featured Projects",
+    aboutTitle: "About Me",
+    projectSource: "Source",
+    projectPreview: "Preview",
+  },
   about: {
     description: `
       Hi, I'm Alejandro Múnez, a passionate Mobile and Web Developer with a knack for crafting seamless digital experiences. With a strong background in both Android and iOS development, as well as front-end web technologies, I thrive in the intersection where creativity meets technology.

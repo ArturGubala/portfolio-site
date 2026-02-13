@@ -87,6 +87,14 @@ export const CONTENT_PL: SiteContent = {
       image: "/clone-ig.png",
     },
   ],
+  ui: {
+    heroCtaButton: "Skontaktuj się",
+    experienceTitle: "Doświadczenie zawodowe",
+    projectsTitle: "Wybrane projekty",
+    aboutTitle: "O mnie",
+    projectSource: "Kod źródłowy",
+    projectPreview: "Podgląd",
+  },
   about: {
     description: `
       Cześć, jestem Alejandro Múnez — pasjonat programowania aplikacji mobilnych i webowych, z talentem do tworzenia płynnych doświadczeń cyfrowych. Dzięki solidnemu doświadczeniu w programowaniu na Androida i iOS oraz technologiach front-endowych, rozwijam się na styku kreatywności i technologii.
