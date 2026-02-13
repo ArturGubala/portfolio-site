@@ -1,0 +1,40 @@
+---
+import type { Locale } from "@i18n/utils";
+import { getLocalizedPath, getAlternateLocale } from "@i18n/utils";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const alternateLocale = getAlternateLocale(locale);
+const alternatePath = getLocalizedPath(alternateLocale);
+---
+
+<div class="flex items-center gap-1 text-sm font-medium">
+  <a
+    href="/"
+    class:list={[
+      "px-1.5 py-0.5 rounded transition-colors duration-300",
+      locale === "pl"
+        ? "text-white bg-primary/20"
+        : "text-neutral hover:text-white",
+    ]}
+    aria-label="Wersja polska"
+  >
+    PL
+  </a>
+  <span class="text-neutral/40">|</span>
+  <a
+    href="/en/"
+    class:list={[
+      "px-1.5 py-0.5 rounded transition-colors duration-300",
+      locale === "en"
+        ? "text-white bg-primary/20"
+        : "text-neutral hover:text-white",
+    ]}
+    aria-label="English version"
+  >
+    EN
+  </a>
+</div>
