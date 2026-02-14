@@ -11,6 +11,7 @@ export const CONFIG_EN: SiteConfig = {
     { text: "Experience", href: "#experience" },
     { text: "Projects", href: "#projects" },
     { text: "About", href: "#about" },
+    { text: "Contact", href: "#contact" },
   ],
   socialLinks: [
     { text: "Twitter", href: "https://github.com/immois/astro-zen" },
@@ -92,6 +93,18 @@ export const CONTENT_EN: SiteContent = {
     aboutTitle: "About Me",
     projectSource: "Source",
     projectPreview: "Preview",
+    contactTitle: "Get in Touch",
+    contactDescription: "Have a question or want to work together? Send me a message and I'll get back to you as soon as possible.",
+    contactNameLabel: "Name",
+    contactNamePlaceholder: "Your name",
+    contactEmailLabel: "Email",
+    contactEmailPlaceholder: "your@email.com",
+    contactMessageLabel: "Message",
+    contactMessagePlaceholder: "Your message...",
+    contactSubmitButton: "Send Message",
+    contactSuccessMessage: "Thank you! Your message has been sent successfully.",
+    contactErrorMessage: "Something went wrong. Please try again later.",
+    contactCaptchaError: "Please complete the captcha verification.",
   },
   about: {
     description: `

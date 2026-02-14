@@ -15,6 +15,18 @@ export interface UiStrings {
   aboutTitle: string;
   projectSource: string;
   projectPreview: string;
+  contactTitle: string;
+  contactDescription: string;
+  contactNameLabel: string;
+  contactNamePlaceholder: string;
+  contactEmailLabel: string;
+  contactEmailPlaceholder: string;
+  contactMessageLabel: string;
+  contactMessagePlaceholder: string;
+  contactSubmitButton: string;
+  contactSuccessMessage: string;
+  contactErrorMessage: string;
+  contactCaptchaError: string;
 }
 
 export interface SiteContent {
