@@ -2,20 +2,29 @@
 import Section from "./Section.astro";
 import { Image } from "astro:assets";
 import type { ProjectProps } from "@types";
+import type { Locale } from "@i18n/utils";
 
 interface Props {
   projects: ProjectProps[];
   sectionTitle: string;
   sourceLabel: string;
   previewLabel: string;
+  viewDetailsLabel: string;
   tabFrontend: string;
   tabBackend: string;
   emptyStateMessage: string;
+  locale: Locale;
 }
 
-const { projects, sectionTitle, sourceLabel, previewLabel, tabFrontend, tabBackend, emptyStateMessage } = Astro.props;
+const { projects, sectionTitle, sourceLabel, previewLabel, viewDetailsLabel, tabFrontend, tabBackend, emptyStateMessage, locale } = Astro.props;
 const frontendProjects = projects.filter(p => p.category === "frontend");
 const backendProjects = projects.filter(p => p.category === "backend");
+
+// Helper function to generate project URL
+const getProjectUrl = (slug?: string) => {
+  if (!slug) return "#";
+  return locale === "pl" ? `/projects/${slug}` : `/en/projects/${slug}`;
+};
 ---
 
 <Section text={sectionTitle} href="projects">
@@ -36,7 +45,7 @@ const backendProjects = projects.filter(p => p.category === "backend");
 
   <div data-tab-content="frontend" class="tab-content">
     {
-      frontendProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+      frontendProjects.map(({ name, summary, image, linkPreview, linkSource, slug }, index) => {
         const top = 98 + index * 40;
         return (
           <div
@@ -49,21 +58,34 @@ const backendProjects = projects.filter(p => p.category === "backend");
                   {name}
                 </h3>
                 <p class="text-base text-neutral">{summary}</p>
-                <div class="flex gap-5 pt-10 text-white">
-                  <a
-                    href={linkSource}
-                    target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                  >
-                    {sourceLabel}
-                  </a>
-                  <a
-                    href={linkPreview}
-                    target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                  >
-                    {previewLabel}
-                  </a>
+                <div class="flex flex-col gap-4 pt-10">
+                  <div class="flex gap-5 text-white">
+                    <a
+                      href={linkSource}
+                      target="_blank"
+                      class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                    >
+                      {sourceLabel}
+                    </a>
+                    <a
+                      href={linkPreview}
+                      target="_blank"
+                      class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                    >
+                      {previewLabel}
+                    </a>
+                  </div>
+                  {slug && (
+                    <a
+                      href={getProjectUrl(slug)}
+                      class="inline-flex w-fit items-center gap-2 rounded-lg border border-primary bg-primary/20 px-4 py-2 text-sm text-white transition-all hover:bg-primary/30"
+                    >
+                      {viewDetailsLabel}
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  )}
                 </div>
               </div>
               <div class="flex items-end justify-end overflow-hidden">
@@ -88,7 +110,7 @@ const backendProjects = projects.filter(p => p.category === "backend");
         <p class="text-lg text-neutral">{emptyStateMessage}</p>
       </div>
     ) : (
-      backendProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+      backendProjects.map(({ name, summary, image, linkPreview, linkSource, slug }, index) => {
         const top = 98 + index * 40;
         return (
           <div
@@ -101,21 +123,34 @@ const backendProjects = projects.filter(p => p.category === "backend");
                   {name}
                 </h3>
                 <p class="text-base text-neutral">{summary}</p>
-                <div class="flex gap-5 pt-10 text-white">
-                  <a
-                    href={linkSource}
-                    target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                  >
-                    {sourceLabel}
-                  </a>
-                  <a
-                    href={linkPreview}
-                    target="_blank"
-                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                  >
-                    {previewLabel}
-                  </a>
+                <div class="flex flex-col gap-4 pt-10">
+                  <div class="flex gap-5 text-white">
+                    <a
+                      href={linkSource}
+                      target="_blank"
+                      class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                    >
+                      {sourceLabel}
+                    </a>
+                    <a
+                      href={linkPreview}
+                      target="_blank"
+                      class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                    >
+                      {previewLabel}
+                    </a>
+                  </div>
+                  {slug && (
+                    <a
+                      href={getProjectUrl(slug)}
+                      class="inline-flex w-fit items-center gap-2 rounded-lg border border-primary bg-primary/20 px-4 py-2 text-sm text-white transition-all hover:bg-primary/30"
+                    >
+                      {viewDetailsLabel}
+                      <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" />
+                      </svg>
+                    </a>
+                  )}
                 </div>
               </div>
               <div class="flex items-end justify-end overflow-hidden">

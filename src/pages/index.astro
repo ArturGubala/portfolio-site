@@ -24,9 +24,11 @@ const web3formsKey = import.meta.env.WEB3FORMS_ACCESS_KEY;
     sectionTitle={ui.projectsTitle}
     sourceLabel={ui.projectSource}
     previewLabel={ui.projectPreview}
+    viewDetailsLabel={ui.projectViewDetails}
     tabFrontend={ui.projectTabFrontend}
     tabBackend={ui.projectTabBackend}
     emptyStateMessage={ui.projectsEmptyState}
+    locale={locale}
   />
   <About {...content.about} name={content.hero.name} sectionTitle={ui.aboutTitle} />
   <Contact ui={ui} web3formsKey={web3formsKey} locale={locale} />

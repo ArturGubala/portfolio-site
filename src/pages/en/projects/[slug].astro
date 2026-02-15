@@ -1,0 +1,42 @@
+---
+import Layout from "@layouts/Layout.astro";
+import ProjectDetail from "@components/ProjectDetail.astro";
+import { getConfig, getContent } from "@i18n/utils";
+import type { ProjectDetailProps } from "@types";
+
+import "../../../styles/global.css";
+
+export async function getStaticPaths() {
+  const content = getContent("en");
+
+  return content.projectDetails.map((project) => ({
+    params: { slug: project.slug },
+    props: { project },
+  }));
+}
+
+interface Props {
+  project: ProjectDetailProps;
+}
+
+const { project } = Astro.props;
+const locale = "en";
+const config = getConfig(locale);
+const content = getContent(locale);
+---
+
+<Layout config={config} locale={locale}>
+  <ProjectDetail
+    project={project}
+    locale={locale}
+    backText={content.ui.projectDetailBack}
+    generalSectionTitle={content.ui.projectDetailGeneral}
+    techSectionTitle={content.ui.projectDetailTech}
+    techStackLabel={content.ui.projectDetailTechStack}
+    architectureLabel={content.ui.projectDetailArchitecture}
+    liveLabel={content.ui.projectDetailLive}
+    sourceLabel={content.ui.projectDetailSource}
+    downloadLabel={content.ui.projectDetailDownload}
+    screenshotsLabel={content.ui.projectDetailScreenshots}
+  />
+</Layout>

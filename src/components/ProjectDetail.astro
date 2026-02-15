@@ -1,0 +1,242 @@
+---
+import { Image } from "astro:assets";
+import type { ProjectDetailProps } from "@types";
+import type { Locale } from "@i18n/utils";
+
+interface Props {
+  project: ProjectDetailProps;
+  locale: Locale;
+  backText: string;
+  generalSectionTitle: string;
+  techSectionTitle: string;
+  techStackLabel: string;
+  architectureLabel: string;
+  liveLabel: string;
+  sourceLabel: string;
+  downloadLabel: string;
+  screenshotsLabel: string;
+}
+
+const {
+  project,
+  locale,
+  backText,
+  generalSectionTitle,
+  techSectionTitle,
+  techStackLabel,
+  architectureLabel,
+  liveLabel,
+  sourceLabel,
+  downloadLabel,
+  screenshotsLabel,
+} = Astro.props;
+
+const backUrl = locale === "pl" ? "/" : "/en/";
+---
+
+<div class="pb-20">
+  <!-- Back button -->
+  <a
+    href={backUrl + "#projects"}
+    class="mb-8 inline-flex items-center gap-2 text-neutral transition-colors hover:text-white"
+  >
+    <svg
+      class="h-5 w-5"
+      fill="none"
+      stroke="currentColor"
+      viewBox="0 0 24 24"
+    >
+      <path
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="M10 19l-7-7m0 0l7-7m-7 7h18"></path>
+    </svg>
+    {backText}
+  </a>
+
+  <!-- Project Header -->
+  <div class="mb-12">
+    <h1 class="mb-4 font-serif text-5xl font-medium text-white">
+      {project.name}
+    </h1>
+    <p class="text-xl text-neutral">{project.summary}</p>
+
+    <!-- Quick Links -->
+    <div class="mt-6 flex flex-wrap gap-4">
+      {
+        project.liveLink && (
+          <a
+            href={project.liveLink}
+            target="_blank"
+            class="inline-flex items-center gap-2 rounded-lg border border-primary bg-primary/20 px-5 py-2.5 text-white transition-all hover:bg-primary/30"
+          >
+            {liveLabel}
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        )
+      }
+      {
+        project.downloadLink && (
+          <a
+            href={project.downloadLink}
+            target="_blank"
+            class="inline-flex items-center gap-2 rounded-lg border border-neutral/20 px-5 py-2.5 text-neutral transition-all hover:border-neutral/40 hover:text-white"
+          >
+            {downloadLabel}
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+            </svg>
+          </a>
+        )
+      }
+      {
+        project.linkSource && (
+          <a
+            href={project.linkSource}
+            target="_blank"
+            class="inline-flex items-center gap-2 rounded-lg border border-neutral/20 px-5 py-2.5 text-neutral transition-all hover:border-neutral/40 hover:text-white"
+          >
+            {sourceLabel}
+            <svg class="h-4 w-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+            </svg>
+          </a>
+        )
+      }
+    </div>
+  </div>
+
+  <!-- Main Image -->
+  <div class="mb-16 overflow-hidden rounded-2xl border border-neutral/20">
+    <Image
+      src={project.image}
+      alt={project.name}
+      width="1200"
+      height="630"
+      class="w-full"
+    />
+  </div>
+
+  <!-- General Section -->
+  <section class="mb-16">
+    <h2
+      class="mb-8 font-serif text-3xl font-medium text-primary before:mr-3 before:content-['#']"
+    >
+      {generalSectionTitle}
+    </h2>
+
+    <div
+      class="rounded-2xl border border-neutral/20 bg-[#1c232d]/50 p-8 before:bg-[url(/raja.png)] before:bg-size-[128px] before:bg-repeat before:opacity-5"
+    >
+      <p class="whitespace-pre-line text-base leading-relaxed text-neutral">
+        {project.description}
+      </p>
+    </div>
+
+    <!-- Screenshots/Video -->
+    {
+      project.video && (
+        <div class="mt-8">
+          <h3 class="mb-4 text-xl font-medium text-white">{screenshotsLabel}</h3>
+          <div class="overflow-hidden rounded-2xl border border-neutral/20">
+            <video
+              src={project.video}
+              controls
+              class="w-full"
+              poster={project.image}
+            />
+          </div>
+        </div>
+      )
+    }
+
+    {
+      project.screenshots && project.screenshots.length > 0 && (
+        <div class="mt-8">
+          <h3 class="mb-4 text-xl font-medium text-white">{screenshotsLabel}</h3>
+          <div class="grid gap-4 sm:grid-cols-2">
+            {project.screenshots.map((screenshot) => (
+              <div class="overflow-hidden rounded-xl border border-neutral/20">
+                <Image
+                  src={screenshot}
+                  alt={`${project.name} screenshot`}
+                  width="600"
+                  height="400"
+                  class="w-full"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </section>
+
+  <!-- Technical Details Section -->
+  <section>
+    <h2
+      class="mb-8 font-serif text-3xl font-medium text-primary before:mr-3 before:content-['#']"
+    >
+      {techSectionTitle}
+    </h2>
+
+    <!-- Tech Stack -->
+    <div class="mb-8">
+      <h3 class="mb-4 text-xl font-medium text-white">{techStackLabel}</h3>
+      <div
+        class="rounded-2xl border border-neutral/20 bg-[#1c232d]/50 p-6"
+      >
+        <div class="flex flex-wrap gap-3">
+          {
+            project.techStack.map((tech) => (
+              <span class="rounded-lg border border-primary/30 bg-primary/10 px-4 py-2 text-sm text-white">
+                {tech}
+              </span>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+
+    <!-- Architecture -->
+    {
+      project.architecture && (
+        <div class="mb-8">
+          <h3 class="mb-4 text-xl font-medium text-white">
+            {architectureLabel}
+          </h3>
+          <div class="rounded-2xl border border-neutral/20 bg-[#1c232d]/50 p-8">
+            <p class="whitespace-pre-line text-base leading-relaxed text-neutral">
+              {project.architecture}
+            </p>
+          </div>
+        </div>
+      )
+    }
+
+    <!-- Diagrams -->
+    {
+      project.diagrams && project.diagrams.length > 0 && (
+        <div>
+          <h3 class="mb-4 text-xl font-medium text-white">Diagrams</h3>
+          <div class="space-y-4">
+            {project.diagrams.map((diagram) => (
+              <div class="overflow-hidden rounded-2xl border border-neutral/20 bg-[#1c232d]/50 p-4">
+                <Image
+                  src={diagram}
+                  alt="Architecture diagram"
+                  width="800"
+                  height="600"
+                  class="w-full"
+                />
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  </section>
+</div>

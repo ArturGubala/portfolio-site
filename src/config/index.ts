@@ -1,4 +1,4 @@
-import type { SiteConfig, SiteContent } from "../types";
+import type { SiteConfig, SiteContent } from "@types";
 
 export const SITE_CONFIG: SiteConfig = {
   title: "Alejandro Múnez — Mobile & Web Developer",
@@ -69,6 +69,8 @@ export const SITE_CONTENT: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/immois/astro-zen",
       image: "/spotifu.png",
+      category: "frontend" as const,
+      slug: "spotifu-music",
     },
     {
       name: "Shopp App",
@@ -76,6 +78,8 @@ export const SITE_CONTENT: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/immois/astro-zen",
       image: "/shopify-clon.png",
+      category: "frontend" as const,
+      slug: "shopp-app",
     },
     {
       name: "ClonTagram",
@@ -83,8 +87,44 @@ export const SITE_CONTENT: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/immois/astro-zen",
       image: "/clone-ig.png",
+      category: "frontend" as const,
+      slug: "clontagram",
     },
   ],
+  projectDetails: [],
+  ui: {
+    heroCtaButton: "Get in Touch",
+    experienceTitle: "Work Experience",
+    projectsTitle: "Featured Projects",
+    aboutTitle: "About Me",
+    projectSource: "Source",
+    projectPreview: "Preview",
+    projectViewDetails: "View Details",
+    projectTabFrontend: "Frontend",
+    projectTabBackend: "Backend",
+    projectsEmptyState: "No projects available yet. Stay tuned!",
+    contactTitle: "Get in Touch",
+    contactDescription: "Have a question or want to work together? Send me a message and I'll get back to you as soon as possible.",
+    contactNameLabel: "Name",
+    contactNamePlaceholder: "Your name",
+    contactEmailLabel: "Email",
+    contactEmailPlaceholder: "your@email.com",
+    contactMessageLabel: "Message",
+    contactMessagePlaceholder: "Your message...",
+    contactSubmitButton: "Send Message",
+    contactSuccessMessage: "Thank you! Your message has been sent successfully.",
+    contactErrorMessage: "Something went wrong. Please try again later.",
+    contactCaptchaError: "Please complete the captcha verification.",
+    projectDetailBack: "Back to Portfolio",
+    projectDetailGeneral: "General Information",
+    projectDetailTech: "Technical Details",
+    projectDetailTechStack: "Tech Stack",
+    projectDetailArchitecture: "Architecture",
+    projectDetailLive: "View Live",
+    projectDetailSource: "Source Code",
+    projectDetailDownload: "Download",
+    projectDetailScreenshots: "Screenshots",
+  },
   about: {
     description: `
       Hi, I’m Alejandro Múnez, a passionate Mobile and Web Developer with a knack for crafting seamless digital experiences. With a strong background in both Android and iOS development, as well as front-end web technologies, I thrive in the intersection where creativity meets technology.
