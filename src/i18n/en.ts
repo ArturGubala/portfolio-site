@@ -70,6 +70,7 @@ export const CONTENT_EN: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/immois/astro-zen",
       image: "/spotifu.png",
+      category: "frontend" as const,
     },
     {
       name: "Shopp App",
@@ -77,6 +78,7 @@ export const CONTENT_EN: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/immois/astro-zen",
       image: "/shopify-clon.png",
+      category: "frontend" as const,
     },
     {
       name: "ClonTagram",
@@ -84,6 +86,7 @@ export const CONTENT_EN: SiteContent = {
       linkPreview: "/",
       linkSource: "https://github.com/immois/astro-zen",
       image: "/clone-ig.png",
+      category: "frontend" as const,
     },
   ],
   ui: {
@@ -93,6 +96,9 @@ export const CONTENT_EN: SiteContent = {
     aboutTitle: "About Me",
     projectSource: "Source",
     projectPreview: "Preview",
+    projectTabFrontend: "Frontend",
+    projectTabBackend: "Backend",
+    projectsEmptyState: "No projects available yet. Stay tuned!",
     contactTitle: "Get in Touch",
     contactDescription: "Have a question or want to work together? Send me a message and I'll get back to you as soon as possible.",
     contactNameLabel: "Name",

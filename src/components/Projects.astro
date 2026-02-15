@@ -8,55 +8,160 @@ interface Props {
   sectionTitle: string;
   sourceLabel: string;
   previewLabel: string;
+  tabFrontend: string;
+  tabBackend: string;
+  emptyStateMessage: string;
 }
 
-const { projects, sectionTitle, sourceLabel, previewLabel } = Astro.props;
+const { projects, sectionTitle, sourceLabel, previewLabel, tabFrontend, tabBackend, emptyStateMessage } = Astro.props;
+const frontendProjects = projects.filter(p => p.category === "frontend");
+const backendProjects = projects.filter(p => p.category === "backend");
 ---
 
 <Section text={sectionTitle} href="projects">
-  {
-    projects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
-      const top = 98 + index * 40;
-      return (
-        <div
-          style={`top: ${top}px;`}
-          class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
-        >
-          <div class="bg-difu relative z-1 grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-size-[128px] before:bg-repeat before:opacity-5 before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
-            <div class="px-6 pt-12">
-              <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
-                {name}
-              </h3>
-              <p class="text-base text-neutral">{summary}</p>
-              <div class="flex gap-5 pt-10 text-white">
-                <a
-                  href={linkSource}
-                  target="_blank"
-                  class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                >
-                  {sourceLabel}
-                </a>
-                <a
-                  href={linkPreview}
-                  target="_blank"
-                  class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
-                >
-                  {previewLabel}
-                </a>
+  <div class="mb-8 flex gap-3">
+    <button
+      data-tab="frontend"
+      class="tab-button active rounded-lg border border-primary bg-primary/20 px-6 py-2 text-sm font-medium text-white transition-all hover:bg-primary/30"
+    >
+      {tabFrontend}
+    </button>
+    <button
+      data-tab="backend"
+      class="tab-button rounded-lg border border-neutral/20 px-6 py-2 text-sm font-medium text-neutral transition-all hover:border-neutral/40 hover:text-white"
+    >
+      {tabBackend}
+    </button>
+  </div>
+
+  <div data-tab-content="frontend" class="tab-content">
+    {
+      frontendProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+        const top = 98 + index * 40;
+        return (
+          <div
+            style={`top: ${top}px;`}
+            class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
+          >
+            <div class="bg-difu relative z-1 grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-size-[128px] before:bg-repeat before:opacity-5 before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
+              <div class="px-6 pt-12">
+                <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
+                  {name}
+                </h3>
+                <p class="text-base text-neutral">{summary}</p>
+                <div class="flex gap-5 pt-10 text-white">
+                  <a
+                    href={linkSource}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    {sourceLabel}
+                  </a>
+                  <a
+                    href={linkPreview}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    {previewLabel}
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-end justify-end overflow-hidden">
+                <Image
+                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-top-left sm:h-[85%] sm:w-full"
+                  src={image}
+                  alt={name}
+                  width="736"
+                  height="483"
+                />
               </div>
             </div>
-            <div class="flex items-end justify-end overflow-hidden">
-              <Image
-                class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-top-left sm:h-[85%] sm:w-full"
-                src={image}
-                alt={name}
-                width="736"
-                height="483"
-              />
+          </div>
+        );
+      })
+    }
+  </div>
+
+  <div data-tab-content="backend" class="tab-content hidden">
+    {backendProjects.length === 0 ? (
+      <div class="flex items-center justify-center rounded-2xl border border-neutral/20 bg-[#1c232d]/50 py-24 text-center">
+        <p class="text-lg text-neutral">{emptyStateMessage}</p>
+      </div>
+    ) : (
+      backendProjects.map(({ name, summary, image, linkPreview, linkSource }, index) => {
+        const top = 98 + index * 40;
+        return (
+          <div
+            style={`top: ${top}px;`}
+            class="sticky mb-12 rounded-2xl border border-neutral/20 bg-black"
+          >
+            <div class="bg-difu relative z-1 grid h-[580px] w-full grid-rows-2 rounded-2xl bg-[#1c232d]/85 before:absolute before:inset-0 before:z-[-1] before:rounded-2xl before:bg-[url(/raja.png)] before:bg-size-[128px] before:bg-repeat before:opacity-5 before:content-[''] sm:grid-cols-2 sm:grid-rows-1 md:h-96">
+              <div class="px-6 pt-12">
+                <h3 class="mb-5 font-serif text-3xl font-medium text-primary">
+                  {name}
+                </h3>
+                <p class="text-base text-neutral">{summary}</p>
+                <div class="flex gap-5 pt-10 text-white">
+                  <a
+                    href={linkSource}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    {sourceLabel}
+                  </a>
+                  <a
+                    href={linkPreview}
+                    target="_blank"
+                    class="after:relative after:bottom-[-5px] after:content-[url(/external.svg)] hover:underline"
+                  >
+                    {previewLabel}
+                  </a>
+                </div>
+              </div>
+              <div class="flex items-end justify-end overflow-hidden">
+                <Image
+                  class="h-full w-[95%] rounded-ss-xl rounded-ee-2xl object-none object-top-left sm:h-[85%] sm:w-full"
+                  src={image}
+                  alt={name}
+                  width="736"
+                  height="483"
+                />
+              </div>
             </div>
           </div>
-        </div>
-      );
-    })
-  }
+        );
+      })
+    )}
+  </div>
 </Section>
+
+<script>
+  const tabButtons = document.querySelectorAll(".tab-button");
+  const tabContents = document.querySelectorAll(".tab-content");
+
+  tabButtons.forEach((button) => {
+    button.addEventListener("click", () => {
+      const tab = button.getAttribute("data-tab");
+
+      // Update button states
+      tabButtons.forEach((btn) => {
+        if (btn.getAttribute("data-tab") === tab) {
+          btn.classList.add("active", "bg-primary/20", "border-primary", "text-white");
+          btn.classList.remove("border-neutral/20", "text-neutral");
+        } else {
+          btn.classList.remove("active", "bg-primary/20", "border-primary", "text-white");
+          btn.classList.add("border-neutral/20", "text-neutral");
+        }
+      });
+
+      // Update content visibility
+      tabContents.forEach((content) => {
+        if (content.getAttribute("data-tab-content") === tab) {
+          content.classList.remove("hidden");
+        } else {
+          content.classList.add("hidden");
+        }
+      });
+    });
+  });
+</script>

@@ -15,6 +15,9 @@ export interface UiStrings {
   aboutTitle: string;
   projectSource: string;
   projectPreview: string;
+  projectTabFrontend: string;
+  projectTabBackend: string;
+  projectsEmptyState: string;
   contactTitle: string;
   contactDescription: string;
   contactNameLabel: string;
@@ -58,6 +61,7 @@ export interface ProjectProps {
   image: string;
   linkPreview?: string;
   linkSource?: string;
+  category: "frontend" | "backend";
 }
 
 export interface AboutProps {
